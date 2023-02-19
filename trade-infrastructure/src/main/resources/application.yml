@@ -1,0 +1,6 @@
+spring:
+  profiles: prd
+  datasource:
+    url: jdbc:mysql://124.223.74.120:3306/mysql
+    username: root
+    password: Zdw@12345
