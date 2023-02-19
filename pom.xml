@@ -22,7 +22,7 @@
     <name>trade-management-system</name>
     <description>trade-management-system</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>19</java.version>
     </properties>
     <dependencies>
         <dependency>
