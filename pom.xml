@@ -17,10 +17,10 @@
     </parent>
 
     <modules>
-        <module>trade-interface</module>
+        <module>trade-service</module>
         <module>trade-api</module>
         <module>trade-infrastructure</module>
-        <module>trade-domain</module>
+        <module>trade-model</module>
         <module>trade-data</module>
     </modules>
     <properties>

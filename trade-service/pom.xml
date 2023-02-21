@@ -9,10 +9,10 @@
     </parent>
 
     <groupId>com.russellzhou</groupId>
-    <artifactId>trade-interface</artifactId>
+    <artifactId>trade-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>trade-interface</name>
-    <description>trade-interface</description>
+    <name>trade-service</name>`
+    <description>trade-service</description>
     <properties>
         <java.version>19</java.version>
     </properties>
