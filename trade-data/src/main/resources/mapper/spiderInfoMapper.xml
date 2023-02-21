@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.russellzhou.trade.data.dao.spiderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.russellzhou.trade.data.entity.spiderInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="web_channel" jdbcType="VARCHAR" property="webChannel" />
+    <result column="sku_brand" jdbcType="VARCHAR" property="skuBrand" />
+    <result column="sku_title" jdbcType="VARCHAR" property="skuTitle" />
+    <result column="sku_type" jdbcType="TINYINT" property="skuType" />
+    <result column="sku_size" jdbcType="VARCHAR" property="skuSize" />
+    <result column="sku_size_unit" jdbcType="VARCHAR" property="skuSizeUnit" />
+    <result column="sku_color" jdbcType="TINYINT" property="skuColor" />
+    <result column="sku_img" jdbcType="VARCHAR" property="skuImg" />
+    <result column="current_price" jdbcType="BIGINT" property="currentPrice" />
+    <result column="lowest_price_flag" jdbcType="TINYINT" property="lowestPriceFlag" />
+    <result column="sku_pruchase_url" jdbcType="VARCHAR" property="skuPruchaseUrl" />
+    <result column="spu_purchase_url" jdbcType="VARCHAR" property="spuPurchaseUrl" />
+    <result column="store_id" jdbcType="BIGINT" property="storeId" />
+    <result column="store_name" jdbcType="VARCHAR" property="storeName" />
+    <result column="store_has_discount_flag" jdbcType="TINYINT" property="storeHasDiscountFlag" />
+    <result column="store_url" jdbcType="VARCHAR" property="storeUrl" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, spu_id, sku_id, web_channel, sku_brand, sku_title, sku_type, sku_size, sku_size_unit, 
+    sku_color, sku_img, current_price, lowest_price_flag, sku_pruchase_url, spu_purchase_url, 
+    store_id, store_name, store_has_discount_flag, store_url, is_del, create_time, modify_time
+  </sql>
+  <select id="selectByExample" parameterType="com.russellzhou.trade.data.entity.spiderInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from spider_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from spider_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from spider_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.russellzhou.trade.data.entity.spiderInfoExample">
+    delete from spider_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.russellzhou.trade.data.entity.spiderInfo">
+    insert into spider_info (id, spu_id, sku_id, 
+      web_channel, sku_brand, sku_title, 
+      sku_type, sku_size, sku_size_unit, 
+      sku_color, sku_img, current_price, 
+      lowest_price_flag, sku_pruchase_url, spu_purchase_url, 
+      store_id, store_name, store_has_discount_flag, 
+      store_url, is_del, create_time, 
+      modify_time)
+    values (#{id,jdbcType=BIGINT}, #{spuId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, 
+      #{webChannel,jdbcType=VARCHAR}, #{skuBrand,jdbcType=VARCHAR}, #{skuTitle,jdbcType=VARCHAR}, 
+      #{skuType,jdbcType=TINYINT}, #{skuSize,jdbcType=VARCHAR}, #{skuSizeUnit,jdbcType=VARCHAR}, 
+      #{skuColor,jdbcType=TINYINT}, #{skuImg,jdbcType=VARCHAR}, #{currentPrice,jdbcType=BIGINT}, 
+      #{lowestPriceFlag,jdbcType=TINYINT}, #{skuPruchaseUrl,jdbcType=VARCHAR}, #{spuPurchaseUrl,jdbcType=VARCHAR}, 
+      #{storeId,jdbcType=BIGINT}, #{storeName,jdbcType=VARCHAR}, #{storeHasDiscountFlag,jdbcType=TINYINT}, 
+      #{storeUrl,jdbcType=VARCHAR}, #{isDel,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.russellzhou.trade.data.entity.spiderInfo">
+    insert into spider_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="webChannel != null">
+        web_channel,
+      </if>
+      <if test="skuBrand != null">
+        sku_brand,
+      </if>
+      <if test="skuTitle != null">
+        sku_title,
+      </if>
+      <if test="skuType != null">
+        sku_type,
+      </if>
+      <if test="skuSize != null">
+        sku_size,
+      </if>
+      <if test="skuSizeUnit != null">
+        sku_size_unit,
+      </if>
+      <if test="skuColor != null">
+        sku_color,
+      </if>
+      <if test="skuImg != null">
+        sku_img,
+      </if>
+      <if test="currentPrice != null">
+        current_price,
+      </if>
+      <if test="lowestPriceFlag != null">
+        lowest_price_flag,
+      </if>
+      <if test="skuPruchaseUrl != null">
+        sku_pruchase_url,
+      </if>
+      <if test="spuPurchaseUrl != null">
+        spu_purchase_url,
+      </if>
+      <if test="storeId != null">
+        store_id,
+      </if>
+      <if test="storeName != null">
+        store_name,
+      </if>
+      <if test="storeHasDiscountFlag != null">
+        store_has_discount_flag,
+      </if>
+      <if test="storeUrl != null">
+        store_url,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="spuId != null">
+        #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="webChannel != null">
+        #{webChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBrand != null">
+        #{skuBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="skuTitle != null">
+        #{skuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="skuType != null">
+        #{skuType,jdbcType=TINYINT},
+      </if>
+      <if test="skuSize != null">
+        #{skuSize,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSizeUnit != null">
+        #{skuSizeUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="skuColor != null">
+        #{skuColor,jdbcType=TINYINT},
+      </if>
+      <if test="skuImg != null">
+        #{skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPrice != null">
+        #{currentPrice,jdbcType=BIGINT},
+      </if>
+      <if test="lowestPriceFlag != null">
+        #{lowestPriceFlag,jdbcType=TINYINT},
+      </if>
+      <if test="skuPruchaseUrl != null">
+        #{skuPruchaseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="spuPurchaseUrl != null">
+        #{spuPurchaseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeHasDiscountFlag != null">
+        #{storeHasDiscountFlag,jdbcType=TINYINT},
+      </if>
+      <if test="storeUrl != null">
+        #{storeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.russellzhou.trade.data.entity.spiderInfoExample" resultType="java.lang.Long">
+    select count(*) from spider_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update spider_info
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=BIGINT},
+      </if>
+      <if test="row.spuId != null">
+        spu_id = #{row.spuId,jdbcType=BIGINT},
+      </if>
+      <if test="row.skuId != null">
+        sku_id = #{row.skuId,jdbcType=BIGINT},
+      </if>
+      <if test="row.webChannel != null">
+        web_channel = #{row.webChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="row.skuBrand != null">
+        sku_brand = #{row.skuBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="row.skuTitle != null">
+        sku_title = #{row.skuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="row.skuType != null">
+        sku_type = #{row.skuType,jdbcType=TINYINT},
+      </if>
+      <if test="row.skuSize != null">
+        sku_size = #{row.skuSize,jdbcType=VARCHAR},
+      </if>
+      <if test="row.skuSizeUnit != null">
+        sku_size_unit = #{row.skuSizeUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="row.skuColor != null">
+        sku_color = #{row.skuColor,jdbcType=TINYINT},
+      </if>
+      <if test="row.skuImg != null">
+        sku_img = #{row.skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="row.currentPrice != null">
+        current_price = #{row.currentPrice,jdbcType=BIGINT},
+      </if>
+      <if test="row.lowestPriceFlag != null">
+        lowest_price_flag = #{row.lowestPriceFlag,jdbcType=TINYINT},
+      </if>
+      <if test="row.skuPruchaseUrl != null">
+        sku_pruchase_url = #{row.skuPruchaseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="row.spuPurchaseUrl != null">
+        spu_purchase_url = #{row.spuPurchaseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="row.storeId != null">
+        store_id = #{row.storeId,jdbcType=BIGINT},
+      </if>
+      <if test="row.storeName != null">
+        store_name = #{row.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.storeHasDiscountFlag != null">
+        store_has_discount_flag = #{row.storeHasDiscountFlag,jdbcType=TINYINT},
+      </if>
+      <if test="row.storeUrl != null">
+        store_url = #{row.storeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="row.isDel != null">
+        is_del = #{row.isDel,jdbcType=TINYINT},
+      </if>
+      <if test="row.createTime != null">
+        create_time = #{row.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.modifyTime != null">
+        modify_time = #{row.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update spider_info
+    set id = #{row.id,jdbcType=BIGINT},
+      spu_id = #{row.spuId,jdbcType=BIGINT},
+      sku_id = #{row.skuId,jdbcType=BIGINT},
+      web_channel = #{row.webChannel,jdbcType=VARCHAR},
+      sku_brand = #{row.skuBrand,jdbcType=VARCHAR},
+      sku_title = #{row.skuTitle,jdbcType=VARCHAR},
+      sku_type = #{row.skuType,jdbcType=TINYINT},
+      sku_size = #{row.skuSize,jdbcType=VARCHAR},
+      sku_size_unit = #{row.skuSizeUnit,jdbcType=VARCHAR},
+      sku_color = #{row.skuColor,jdbcType=TINYINT},
+      sku_img = #{row.skuImg,jdbcType=VARCHAR},
+      current_price = #{row.currentPrice,jdbcType=BIGINT},
+      lowest_price_flag = #{row.lowestPriceFlag,jdbcType=TINYINT},
+      sku_pruchase_url = #{row.skuPruchaseUrl,jdbcType=VARCHAR},
+      spu_purchase_url = #{row.spuPurchaseUrl,jdbcType=VARCHAR},
+      store_id = #{row.storeId,jdbcType=BIGINT},
+      store_name = #{row.storeName,jdbcType=VARCHAR},
+      store_has_discount_flag = #{row.storeHasDiscountFlag,jdbcType=TINYINT},
+      store_url = #{row.storeUrl,jdbcType=VARCHAR},
+      is_del = #{row.isDel,jdbcType=TINYINT},
+      create_time = #{row.createTime,jdbcType=TIMESTAMP},
+      modify_time = #{row.modifyTime,jdbcType=TIMESTAMP}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.russellzhou.trade.data.entity.spiderInfo">
+    update spider_info
+    <set>
+      <if test="spuId != null">
+        spu_id = #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="webChannel != null">
+        web_channel = #{webChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBrand != null">
+        sku_brand = #{skuBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="skuTitle != null">
+        sku_title = #{skuTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="skuType != null">
+        sku_type = #{skuType,jdbcType=TINYINT},
+      </if>
+      <if test="skuSize != null">
+        sku_size = #{skuSize,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSizeUnit != null">
+        sku_size_unit = #{skuSizeUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="skuColor != null">
+        sku_color = #{skuColor,jdbcType=TINYINT},
+      </if>
+      <if test="skuImg != null">
+        sku_img = #{skuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPrice != null">
+        current_price = #{currentPrice,jdbcType=BIGINT},
+      </if>
+      <if test="lowestPriceFlag != null">
+        lowest_price_flag = #{lowestPriceFlag,jdbcType=TINYINT},
+      </if>
+      <if test="skuPruchaseUrl != null">
+        sku_pruchase_url = #{skuPruchaseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="spuPurchaseUrl != null">
+        spu_purchase_url = #{spuPurchaseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="storeName != null">
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeHasDiscountFlag != null">
+        store_has_discount_flag = #{storeHasDiscountFlag,jdbcType=TINYINT},
+      </if>
+      <if test="storeUrl != null">
+        store_url = #{storeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.russellzhou.trade.data.entity.spiderInfo">
+    update spider_info
+    set spu_id = #{spuId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      web_channel = #{webChannel,jdbcType=VARCHAR},
+      sku_brand = #{skuBrand,jdbcType=VARCHAR},
+      sku_title = #{skuTitle,jdbcType=VARCHAR},
+      sku_type = #{skuType,jdbcType=TINYINT},
+      sku_size = #{skuSize,jdbcType=VARCHAR},
+      sku_size_unit = #{skuSizeUnit,jdbcType=VARCHAR},
+      sku_color = #{skuColor,jdbcType=TINYINT},
+      sku_img = #{skuImg,jdbcType=VARCHAR},
+      current_price = #{currentPrice,jdbcType=BIGINT},
+      lowest_price_flag = #{lowestPriceFlag,jdbcType=TINYINT},
+      sku_pruchase_url = #{skuPruchaseUrl,jdbcType=VARCHAR},
+      spu_purchase_url = #{spuPurchaseUrl,jdbcType=VARCHAR},
+      store_id = #{storeId,jdbcType=BIGINT},
+      store_name = #{storeName,jdbcType=VARCHAR},
+      store_has_discount_flag = #{storeHasDiscountFlag,jdbcType=TINYINT},
+      store_url = #{storeUrl,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
