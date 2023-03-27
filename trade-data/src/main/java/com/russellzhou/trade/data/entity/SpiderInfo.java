@@ -3,13 +3,14 @@ package com.russellzhou.trade.data.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 商品爬虫结果实体类
+ * 爬虫数据实体
  */
-@Getter
 @Setter
+@Getter
 public class SpiderInfo {
     /**
      *   主键id
@@ -17,118 +18,98 @@ public class SpiderInfo {
     private Long id;
 
     /**
-     *   spu编号
+     *   商品id
      */
-    private Long spuId;
+    private String productId;
 
     /**
-     *   商品编号
+     *   品牌名称（英文）
      */
-    private Long skuId;
+    private String brandEn;
 
     /**
-     *   数据来源站点
+     *   品牌名称（中文）
+     */
+    private String brandZh;
+
+    /**
+     *   数据来源
      */
     private String webChannel;
 
     /**
-     *   商品品牌
-     */
-    private String skuBrand;
-
-    /**
      *   商品名称
      */
-    private String skuTitle;
+    private String productTitle;
 
     /**
-     *   商品类别，鞋、衣服等
+     *   款式
      */
-    private Byte skuType;
+    private String productType;
 
     /**
-     *   商品尺码
+     *   尺码/规格
      */
-    private String skuSize;
-
-    /**
-     *   商品尺码单位
-     */
-    private String skuSizeUnit;
-
-    /**
-     *   商品颜色
-     */
-    private String skuColor;
+    private String productSize;
 
     /**
      *   商品图片
      */
-    private String skuImg;
+    private String imgUrl;
 
     /**
-     *   当前价格
+     *   市场原价
      */
-    private Integer skuPrice;
+    private BigDecimal originPrice;
 
     /**
-     *   是否历史最低价
+     *   实际价格
      */
-    private Byte lowestPriceFlag;
+    private BigDecimal actualPrice;
 
     /**
-     *   Sku购买链接
+     *   是否历史最低价 0-否 1-是
      */
-    private String skuPruchaseUrl;
+    private Integer lowestPriceFlag;
 
     /**
-     *   Spu购买链接
+     *   折扣额度
      */
-    private String spuPurchaseUrl;
+    private Double discount;
 
     /**
-     *   适用性别
+     *   优惠模式
      */
-    private Byte sex;
+    private String discountMode;
 
     /**
-     *   是否是成人款
+     *   是否有优惠 0-没有 1-有
      */
-    private Byte adultFlag;
+    private Integer hasDiscountFlag;
 
     /**
-     *   店铺编号
+     *   商铺信息
      */
-    private Long storeId;
+    private String shopInfo;
 
     /**
-     *   店铺名称
+     *   商场信息
      */
-    private String storeName;
+    private String storeInfo;
 
     /**
-     *   当前店铺是否存在优惠
+     * 运行类型
      */
-    private Byte storeHasDiscountFlag;
+    private Integer operateType;
 
     /**
-     *   店铺链接
+     * 操作人
      */
-    private String storeUrl;
+    private String operator;
 
     /**
-     *   是否删除
+     * 创建时间
      */
-    private Byte isDel;
-
-    /**
-     *   创建时间
-     */
-    private Date createTime;
-
-    /**
-     *   修改时间
-     */
-    private Date modifyTime;
+    private Date createdTime;
 
 }

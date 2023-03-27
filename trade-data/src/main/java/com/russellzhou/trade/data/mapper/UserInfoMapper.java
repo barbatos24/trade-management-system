@@ -1,4 +1,4 @@
-package com.russellzhou.trade.data.dao;
+package com.russellzhou.trade.data.mapper;
 
 import com.russellzhou.trade.data.entity.UserInfo;
 

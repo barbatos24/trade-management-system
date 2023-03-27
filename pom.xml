@@ -20,12 +20,15 @@
         <module>trade-service</module>
         <module>trade-api</module>
         <module>trade-infrastructure</module>
-        <module>trade-model</module>
         <module>trade-data</module>
     </modules>
+
     <properties>
         <java.version>19</java.version>
+        <fastjson.version>2.0.25</fastjson.version>
+        <common-lang3.version>3.12.0</common-lang3.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -41,11 +44,20 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${common-lang3.version}</version>
+        </dependency>
     </dependencies>
-
 
 </project>

@@ -5,19 +5,19 @@ import java.io.Serializable;
 /**
  * @author： zhoudewei
  * @date： 2023/2/21 13:48
- * @description： 接口最外层通用返回类
+ * @description： tms系统接口最外层通用返回类
  * @version： v1.0
  */
-public class Result<T> implements Serializable{
+public class ResponseVO<T> implements Serializable {
     private Integer code;
     private String msg;
     private T data;
 
-    public Result() {
+    public ResponseVO() {
         super();
     }
 
-    public Result(Integer code, String msg, T data) {
+    public ResponseVO(Integer code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.data = data;
@@ -49,7 +49,7 @@ public class Result<T> implements Serializable{
 
     @Override
     public String toString() {
-        return "Result{" +
+        return "ResponseVO{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
                 ", data=" + data +
