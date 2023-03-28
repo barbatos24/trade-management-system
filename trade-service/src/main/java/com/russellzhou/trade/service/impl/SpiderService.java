@@ -1,4 +1,4 @@
-package com.russellzhou.trade.service.impl.spider;
+package com.russellzhou.trade.service.impl;
 
 import com.russellzhou.trade.data.dao.SpiderInfoDao;
 import com.russellzhou.trade.infrastructure.adapter.BaiLianAdapter;
@@ -116,7 +116,7 @@ public class SpiderService {
                         productInfoDto.setMarketPrice(rc.getMarketPrice());
                         productInfoDto.setDiscountPrice(rc.getGoodsPrice());
                         productInfoDto.setDiscount(rc.getDiscount());
-                        productInfoDto.setDiscountMode(detailV3Response.getPromotionList());productInfoDtoList.add(productInfoDto);
+                        productInfoDto.setDiscountMode(detailV3Response.getPromotionList());
                         productInfoDtoList.add(productInfoDto);
                         order ++;
                     }

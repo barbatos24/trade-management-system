@@ -44,7 +44,7 @@ public class UserInfo {
     /**
      *   是否删除
      */
-    private Byte isDel;
+    private Integer isDel;
 
     /**
      *   创建时间

@@ -58,7 +58,7 @@ public class BaiLianAdapter {
             SearchV5Response.ResultCommodity rc = new SearchV5Response.ResultCommodity();
             rc.setProductId(resultCommodityObj.getString("productId"));
             rc.setGoodsStandaName(resultCommodityObj.getString("goodsStandaName"));
-            rc.setImageUrl(resultCommodityObj.getString("imgUrl"));
+            rc.setImageUrl(resultCommodityObj.getString("imageUrl"));
             rc.setMarketPrice(resultCommodityObj.getFloat("marketPrice"));
             rc.setGoodsPrice(resultCommodityObj.getFloat("goodsPrice"));
             rc.setIsAvailable("1".equals(resultCommodityObj.getString("isAvailable")));

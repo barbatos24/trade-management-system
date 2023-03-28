@@ -1,9 +1,10 @@
 package com.russellzhou.trade.api.interfaces;
 
+import com.alibaba.fastjson.JSON;
 import com.russellzhou.trade.api.assembler.SpiderApiAssembler;
 import com.russellzhou.trade.api.request.BaiLianCommodityInfoRequest;
 import com.russellzhou.trade.infrastructure.utils.ResponseVO;
-import com.russellzhou.trade.service.impl.spider.SpiderService;
+import com.russellzhou.trade.service.impl.SpiderService;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,9 @@ public class SpiderApi {
 
     @PostMapping(value = "/crawlBaiLianCommodityInfo")
     public ResponseVO<Void> crawlBaiLianCommodityInfo(@RequestBody BaiLianCommodityInfoRequest request){
+        log.info("开始爬取百联云店信息 crawlBaiLianCommodityInfo request:{}", JSON.toJSONString(request));
         spiderService.crawlBaiLianCommodityInfo(SpiderApiAssembler.convert2GetBaiLianCommodityDto(request));
-        return new ResponseVO(200, "Success", null);
+        return ResponseVO.ofSuccess(null);
     }
 
 }
