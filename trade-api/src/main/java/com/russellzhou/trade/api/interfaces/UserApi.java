@@ -1,13 +1,12 @@
 package com.russellzhou.trade.api.interfaces;
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson.JSON;
-import com.russellzhou.trade.api.request.RegisterRequest;
-import com.russellzhou.trade.api.request.VerifyLoginRequest;
+import com.russellzhou.trade.api.interfaces.request.RegisterRequest;
+import com.russellzhou.trade.api.interfaces.request.VerifyLoginRequest;
 import com.russellzhou.trade.infrastructure.common.exception.TmsException;
 import com.russellzhou.trade.infrastructure.common.exception.TmsExceptionMessage;
 import com.russellzhou.trade.infrastructure.utils.ResponseVO;
-import com.russellzhou.trade.service.impl.UserService;
+import com.russellzhou.trade.api.service.impl.UserService;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

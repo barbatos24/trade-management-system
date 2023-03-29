@@ -1,4 +1,4 @@
-package com.russellzhou.trade.service.dto.spider;
+package com.russellzhou.trade.api.service.dto.spider;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -17,7 +17,6 @@
     </parent>
 
     <modules>
-        <module>trade-service</module>
         <module>trade-api</module>
         <module>trade-infrastructure</module>
         <module>trade-data</module>

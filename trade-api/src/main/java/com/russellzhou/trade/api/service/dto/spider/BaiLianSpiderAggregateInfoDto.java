@@ -1,4 +1,4 @@
-package com.russellzhou.trade.service.dto.spider;
+package com.russellzhou.trade.api.service.dto.spider;
 
 import com.russellzhou.trade.infrastructure.common.enums.SpiderOperateTypeEnum;
 import lombok.Getter;

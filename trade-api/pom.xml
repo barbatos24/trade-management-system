@@ -15,7 +15,6 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <trade-infrastructure.version>0.0.1-SNAPSHOT</trade-infrastructure.version>
-        <trade-service.version>0.0.1-SNAPSHOT</trade-service.version>
         <springfox-swagger.version>3.0.0</springfox-swagger.version>
         <sa-token.version>1.34.0</sa-token.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
@@ -35,11 +34,6 @@
             <groupId>com.russellzhou</groupId>
             <artifactId>trade-infrastructure</artifactId>
             <version>${trade-infrastructure.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.russellzhou</groupId>
-            <artifactId>trade-service</artifactId>
-            <version>${trade-service.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>

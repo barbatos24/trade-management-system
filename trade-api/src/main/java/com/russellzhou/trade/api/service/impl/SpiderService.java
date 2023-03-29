@@ -1,4 +1,4 @@
-package com.russellzhou.trade.service.impl;
+package com.russellzhou.trade.api.service.impl;
 
 import com.russellzhou.trade.data.dao.SpiderInfoDao;
 import com.russellzhou.trade.infrastructure.adapter.BaiLianAdapter;
@@ -9,9 +9,9 @@ import com.russellzhou.trade.infrastructure.common.enums.BaiLianStoreEnum;
 import com.russellzhou.trade.infrastructure.common.enums.BaiLianShopEnum;
 import com.russellzhou.trade.infrastructure.common.enums.SpiderOperateTypeEnum;
 import com.russellzhou.trade.infrastructure.common.enums.SpiderWebChannelEnum;
-import com.russellzhou.trade.service.dto.assembler.SpiderInfoAssembler;
-import com.russellzhou.trade.service.dto.spider.BaiLianSpiderAggregateInfoDto;
-import com.russellzhou.trade.service.dto.spider.GetBaiLianCommodityDto;
+import com.russellzhou.trade.api.assembler.dao.SpiderInfoAssembler;
+import com.russellzhou.trade.api.service.dto.spider.BaiLianSpiderAggregateInfoDto;
+import com.russellzhou.trade.api.service.dto.spider.GetBaiLianCommodityDto;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -141,5 +141,6 @@ public class SpiderService {
         aggregateInfoDto.setOperatorType(SpiderOperateTypeEnum.get(operateType));
         aggregateInfoDto.setOperator(userName);
     }
+
 
 }

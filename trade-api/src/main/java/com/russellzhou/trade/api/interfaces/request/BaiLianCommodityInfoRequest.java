@@ -1,4 +1,4 @@
-package com.russellzhou.trade.api.request;
+package com.russellzhou.trade.api.interfaces.request;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;

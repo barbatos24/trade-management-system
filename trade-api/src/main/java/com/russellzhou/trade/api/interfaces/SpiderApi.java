@@ -1,10 +1,13 @@
 package com.russellzhou.trade.api.interfaces;
 
 import com.alibaba.fastjson.JSON;
-import com.russellzhou.trade.api.assembler.SpiderApiAssembler;
-import com.russellzhou.trade.api.request.BaiLianCommodityInfoRequest;
+import com.russellzhou.trade.api.assembler.dto.SpiderApiAssembler;
+import com.russellzhou.trade.api.interfaces.request.BaiLianCommodityInfoRequest;
+import com.russellzhou.trade.api.interfaces.request.QueryCrawledDataRequest;
+import com.russellzhou.trade.api.interfaces.response.QueryCrawledDataResponse;
+import com.russellzhou.trade.api.service.impl.SpiderService;
 import com.russellzhou.trade.infrastructure.utils.ResponseVO;
-import com.russellzhou.trade.service.impl.SpiderService;
+import com.russellzhou.trade.service.impl.spider.SpiderService;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,11 +28,25 @@ public class SpiderApi {
     @Resource
     private SpiderService spiderService;
 
+    /**
+     * 爬取百联云店的商品信息
+     * @param request
+     * @return
+     */
     @PostMapping(value = "/crawlBaiLianCommodityInfo")
     public ResponseVO<Void> crawlBaiLianCommodityInfo(@RequestBody BaiLianCommodityInfoRequest request){
         log.info("开始爬取百联云店信息 crawlBaiLianCommodityInfo request:{}", JSON.toJSONString(request));
         spiderService.crawlBaiLianCommodityInfo(SpiderApiAssembler.convert2GetBaiLianCommodityDto(request));
         return ResponseVO.ofSuccess(null);
+    }
+
+    /**
+     * 查询爬取到的信息
+     * @return
+     */
+    @PostMapping(value = "/queryCrawledData")
+    public ResponseVO<QueryCrawledDataResponse> queryCrawledData(@RequestBody QueryCrawledDataRequest request){
+        return null;
     }
 
 }

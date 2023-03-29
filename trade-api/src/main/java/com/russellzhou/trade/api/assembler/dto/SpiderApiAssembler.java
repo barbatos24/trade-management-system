@@ -1,8 +1,8 @@
-package com.russellzhou.trade.api.assembler;
+package com.russellzhou.trade.api.assembler.dto;
 
-import com.russellzhou.trade.api.request.BaiLianCommodityInfoRequest;
+import com.russellzhou.trade.api.interfaces.request.BaiLianCommodityInfoRequest;
+import com.russellzhou.trade.api.service.dto.spider.GetBaiLianCommodityDto;
 import com.russellzhou.trade.infrastructure.common.enums.BaiLianShopEnum;
-import com.russellzhou.trade.service.dto.spider.GetBaiLianCommodityDto;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;

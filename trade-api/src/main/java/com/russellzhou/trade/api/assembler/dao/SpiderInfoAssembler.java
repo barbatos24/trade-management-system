@@ -1,9 +1,9 @@
-package com.russellzhou.trade.service.dto.assembler;
+package com.russellzhou.trade.api.assembler.dao;
 
 import com.alibaba.fastjson.JSON;
 import com.russellzhou.trade.data.entity.SpiderInfo;
 import com.russellzhou.trade.infrastructure.utils.PriceUtils;
-import com.russellzhou.trade.service.dto.spider.BaiLianSpiderAggregateInfoDto;
+import com.russellzhou.trade.api.service.dto.spider.BaiLianSpiderAggregateInfoDto;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;

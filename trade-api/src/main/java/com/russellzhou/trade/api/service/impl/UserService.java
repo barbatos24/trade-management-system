@@ -1,4 +1,4 @@
-package com.russellzhou.trade.service.impl;
+package com.russellzhou.trade.api.service.impl;
 
 import com.russellzhou.trade.data.dao.UserInfoDao;
 import com.russellzhou.trade.data.entity.UserInfo;
