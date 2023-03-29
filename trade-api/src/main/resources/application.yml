@@ -48,3 +48,10 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: false
+
+############## mybatis分页插件 配置  ##############
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countsql

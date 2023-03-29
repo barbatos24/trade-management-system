@@ -3,7 +3,6 @@ package com.russellzhou.trade.data.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -60,12 +59,12 @@ public class SpiderInfo {
     /**
      *   市场原价
      */
-    private BigDecimal originPrice;
+    private Long originPrice;
 
     /**
      *   实际价格
      */
-    private BigDecimal actualPrice;
+    private Long actualPrice;
 
     /**
      *   是否历史最低价 0-否 1-是

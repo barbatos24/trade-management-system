@@ -25,8 +25,12 @@
     <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
   </resultMap>
 
+  <sql id="Base_Column_List">
+    id, product_id, brand_en, brand_zh, web_channel, product_title, product_type, product_size, img_url, origin_price, actual_price,  lowest_price_flag, discount, discount_mode, has_discount_flag, shop_info, store_info, operate_type, operator, created_time
+  </sql>
+
   <insert id="insert" parameterType="com.russellzhou.trade.data.entity.SpiderInfo">
-    insert into spider_info (product_id, brand_en,
+    insert into `spider_info` (product_id, brand_en,
       brand_zh, web_channel, product_title, 
       product_type, product_size, img_url, 
       origin_price, actual_price, lowest_price_flag, 
@@ -41,7 +45,7 @@
   </insert>
 
   <insert id="batchInsert" parameterType="java.util.List">
-    INSERT INTO  spider_info (product_id, brand_en,brand_zh,
+    INSERT INTO  `spider_info` (product_id, brand_en,brand_zh,
     web_channel, product_title,product_type,
     product_size, img_url,origin_price,
     actual_price, lowest_price_flag,discount,
@@ -60,143 +64,30 @@
     </foreach>
   </insert>
 
-  <insert id="insertSelective" parameterType="com.russellzhou.trade.data.entity.SpiderInfo">
-    insert into spider_info
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="productId != null">
-        product_id,
-      </if>
+  <select id="selectBySelective" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `spider_info`
+    <where>
       <if test="brandEn != null">
-        brand_en,
+        `brand_en` = #{brandEn}
       </if>
       <if test="brandZh != null">
-        brand_zh,
+        `brand_zh` = #{brandZh}
       </if>
-      <if test="webChannel != null">
-        web_channel,
+      <if test="maxPrice != null">
+        `actual_price` <![CDATA[ <=> ]]> #{maxPrice}
       </if>
-      <if test="productTitle != null">
-        product_title,
-      </if>
-      <if test="productType != null">
-        product_type,
-      </if>
-      <if test="productSize != null">
-        product_size,
-      </if>
-      <if test="imgUrl != null">
-        img_url,
-      </if>
-      <if test="originPrice != null">
-        origin_price,
-      </if>
-      <if test="actualPrice != null">
-        actual_price,
-      </if>
-      <if test="lowestPriceFlag != null">
-        lowest_price_flag,
-      </if>
-      <if test="discount != null">
-        discount,
-      </if>
-      <if test="discountMode != null">
-        discount_mode,
+      <if test="minPrice != null">
+        `actual_price` <![CDATA[ >= ]]> #{minPrice}
       </if>
       <if test="hasDiscountFlag != null">
-        has_discount_flag,
+        `has_discount_flag` = #{hasDiscountFlag}
       </if>
-      <if test="sex != null">
-        sex,
+      <if test="storeName != null">
+        `store_info` -> '$.storeName' = #{storeName}
       </if>
-      <if test="adultFlag != null">
-        adult_flag,
-      </if>
-      <if test="shopInfo != null">
-        shop_info,
-      </if>
-      <if test="storeInfo != null">
-        store_info,
-      </if>
-      <if test="operateType != null">
-        operate_type,
-      </if>
-      <if test="operator != null">
-        operator,
-      </if>
-      <if test="createdTime != null">
-          created_time
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="productId != null">
-        #{productId,jdbcType=VARCHAR},
-      </if>
-      <if test="brandEn != null">
-        #{brandEn,jdbcType=VARCHAR},
-      </if>
-      <if test="brandZh != null">
-        #{brandZh,jdbcType=VARCHAR},
-      </if>
-      <if test="webChannel != null">
-        #{webChannel,jdbcType=VARCHAR},
-      </if>
-      <if test="productTitle != null">
-        #{productTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="productType != null">
-        #{productType,jdbcType=VARCHAR},
-      </if>
-      <if test="productSize != null">
-        #{productSize,jdbcType=VARCHAR},
-      </if>
-      <if test="imgUrl != null">
-        #{imgUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="originPrice != null">
-        #{originPrice,jdbcType=INTEGER},
-      </if>
-      <if test="actualPrice != null">
-        #{actualPrice,jdbcType=INTEGER},
-      </if>
-      <if test="lowestPriceFlag != null">
-        #{lowestPriceFlag,jdbcType=TINYINT},
-      </if>
-      <if test="discount != null">
-        #{discount,jdbcType=INTEGER},
-      </if>
-      <if test="discountMode != null">
-        #{discountMode,jdbcType=VARCHAR},
-      </if>
-      <if test="hasDiscountFlag != null">
-        #{hasDiscountFlag,jdbcType=TINYINT},
-      </if>
-      <if test="sex != null">
-        #{sex,jdbcType=TINYINT},
-      </if>
-      <if test="adultFlag != null">
-        #{adultFlag,jdbcType=TINYINT},
-      </if>
-      <if test="shopInfo != null">
-        #{shopInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="storeInfo != null">
-        #{storeInfo,jdbcType=VARCHAR},
-      </if>
-      <if test="operateType != null">
-        #{operate_type,jdbcType=TINYINT},
-      </if>
-      <if test="operator != null">
-        #{operator,jdbcType=VARCHAR},
-      </if>
-      <if test="createdTime != null">
-          #{createdTime,jdbcType=TIMESTAMP}
-      </if>
-    </trim>
-  </insert>
+    </where>
+  </select>
+
 </mapper>

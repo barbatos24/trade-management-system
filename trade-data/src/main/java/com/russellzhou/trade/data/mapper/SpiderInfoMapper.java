@@ -4,6 +4,7 @@ import com.russellzhou.trade.data.entity.SpiderInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface SpiderInfoMapper {
@@ -12,5 +13,5 @@ public interface SpiderInfoMapper {
 
     int batchInsert(List<SpiderInfo> list);
 
-    int insertSelective(SpiderInfo row);
+    List<SpiderInfo> selectBySelective(Map<String, Object> map);
 }

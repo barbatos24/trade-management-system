@@ -19,9 +19,20 @@ public class QueryCrawledDataResponse implements Serializable {
 
     private static final long serialVersionUID = 6506450291738614856L;
 
+    @ApiModelProperty(value = "当前页号")
+    private Integer pageNo;
+
+    @ApiModelProperty(value = "当前页大小")
+    private Integer pageSize;
+
+    @ApiModelProperty(value = "总共页数")
+    private Integer totalPage;
+
+    @ApiModelProperty(value = "总共数据条数")
+    private Integer totalNum;
+
     @ApiModelProperty(value = "数据详情")
     private List<DataDetail> dataDetailList;
-
 
     @Setter
     @Getter

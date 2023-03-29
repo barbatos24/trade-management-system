@@ -1,6 +1,13 @@
 package com.russellzhou.trade.api.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.russellzhou.trade.api.interfaces.request.QueryCrawledDataRequest;
+import com.russellzhou.trade.api.interfaces.response.QueryCrawledDataResponse;
 import com.russellzhou.trade.data.dao.SpiderInfoDao;
+import com.russellzhou.trade.data.entity.SpiderInfo;
 import com.russellzhou.trade.infrastructure.adapter.BaiLianAdapter;
 import com.russellzhou.trade.infrastructure.adapter.request.SearchV5Request;
 import com.russellzhou.trade.infrastructure.adapter.response.DetailV3Response;
@@ -12,15 +19,15 @@ import com.russellzhou.trade.infrastructure.common.enums.SpiderWebChannelEnum;
 import com.russellzhou.trade.api.assembler.dao.SpiderInfoAssembler;
 import com.russellzhou.trade.api.service.dto.spider.BaiLianSpiderAggregateInfoDto;
 import com.russellzhou.trade.api.service.dto.spider.GetBaiLianCommodityDto;
+import com.russellzhou.trade.infrastructure.utils.PriceUtils;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author： zhoudewei
@@ -142,5 +149,60 @@ public class SpiderService {
         aggregateInfoDto.setOperator(userName);
     }
 
+    /**
+     * 获取爬虫信息
+     * @param request
+     * @return
+     */
+    public QueryCrawledDataResponse queryCrawledData(QueryCrawledDataRequest request){
+        QueryCrawledDataResponse response = new QueryCrawledDataResponse();
+        List<QueryCrawledDataResponse.DataDetail> dataDetailList = new ArrayList<>();
+
+        PageHelper.startPage(request.getPageNo(), request.getPageSize());
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("brandEn", request.getBrandName());
+        paramMap.put("maxPrice", request.getMaxPrice());
+        paramMap.put("minPrice", request.getMinPrice());
+        paramMap.put("storeName", request.getStoreName());
+        paramMap.put("hasDiscountFlag", request.getHasDiscount() ? 1 : 0);
+        PageInfo<SpiderInfo> spiderInfoListByPage = new PageInfo<>(spiderInfoDao.querySpiderInfoListBySelective(paramMap));
+
+        response.setPageNo(spiderInfoListByPage.getPageNum());
+        response.setPageSize(spiderInfoListByPage.getPageSize());
+        response.setTotalPage(spiderInfoListByPage.getPages());
+        response.setTotalNum(spiderInfoListByPage.getSize());
+
+        for(SpiderInfo spider : spiderInfoListByPage.getList()){
+            QueryCrawledDataResponse.DataDetail detail = new QueryCrawledDataResponse.DataDetail();
+            //商品信息
+            detail.setBaiLianProductId(spider.getProductId());
+            detail.setBrandEn(spider.getBrandEn());
+            detail.setBrandZh(spider.getBrandZh());
+            detail.setTitle(spider.getProductTitle());
+            if(StringUtils.isNotEmpty(spider.getProductSize())){
+                detail.setProductSize(Arrays.asList(spider.getProductSize().split(",")));
+            }
+            if(StringUtils.isNotEmpty(spider.getProductType())){
+                detail.setProductType(Arrays.asList(spider.getProductType().split(",")));
+            }
+            detail.setImgUrl(spider.getImgUrl());
+            detail.setMarketPrice(PriceUtils.changeFen2ChineseYuan(spider.getOriginPrice()));
+            detail.setActualPrice(PriceUtils.changeFen2ChineseYuan(spider.getActualPrice()));
+            //优惠信息
+            QueryCrawledDataResponse.DiscountInfo discount = new QueryCrawledDataResponse.DiscountInfo();
+            discount.setDiscount(String.valueOf(spider.getDiscount()));
+            discount.setDiscountModeList(Arrays.asList(spider.getDiscountMode().split(",")));
+            detail.setDiscountInfo(discount);
+            //商场信息
+            QueryCrawledDataResponse.StoreInfo store = new QueryCrawledDataResponse.StoreInfo();
+            JSONObject storeJson = JSONObject.parseObject(spider.getStoreInfo());
+            store.setStoreName(storeJson.getString("storeName"));
+            store.setStoreAddress(BaiLianStoreEnum.get(storeJson.getString("storeCode")).getStoreAddress());
+            detail.setStoreInfo(store);
+            dataDetailList.add(detail);
+        }
+        response.setDataDetailList(dataDetailList);
+        return response;
+    }
 
 }

@@ -15,8 +15,18 @@ public class PriceUtils {
      * @param amount
      * @return
      */
-    public static BigDecimal changeYuan2Fen(Float amount){
-        return new BigDecimal(amount).multiply(new BigDecimal(100));
+    public static long changeYuan2Fen(Float amount){
+        return new BigDecimal(amount).multiply(new BigDecimal(100)).longValue();
+    }
+
+    /**
+     * 转换分为人民币¥的形式
+     * @return
+     */
+    public static String changeFen2ChineseYuan(Long price){
+        StringBuffer sb = new StringBuffer();
+        sb.append("¥").append(BigDecimal.valueOf(price).divide(new BigDecimal(100)).toString());
+        return sb.toString();
     }
 
 }

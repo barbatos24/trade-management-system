@@ -7,7 +7,6 @@ import com.russellzhou.trade.api.interfaces.request.QueryCrawledDataRequest;
 import com.russellzhou.trade.api.interfaces.response.QueryCrawledDataResponse;
 import com.russellzhou.trade.api.service.impl.SpiderService;
 import com.russellzhou.trade.infrastructure.utils.ResponseVO;
-import com.russellzhou.trade.service.impl.spider.SpiderService;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +45,7 @@ public class SpiderApi {
      */
     @PostMapping(value = "/queryCrawledData")
     public ResponseVO<QueryCrawledDataResponse> queryCrawledData(@RequestBody QueryCrawledDataRequest request){
-        return null;
+        return ResponseVO.ofSuccess(spiderService.queryCrawledData(request));
     }
 
 }

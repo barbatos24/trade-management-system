@@ -17,6 +17,12 @@ import java.io.Serializable;
 public class QueryCrawledDataRequest implements Serializable {
     private static final long serialVersionUID = -971990944177790938L;
 
+    @ApiModelProperty(value = "页号)")
+    private Integer pageNo;
+
+    @ApiModelProperty(value = "页大小)")
+    private Integer pageSize;
+
     @ApiModelProperty(value = "品牌名称(英文)")
     private String brandName;
 

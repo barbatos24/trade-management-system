@@ -6,6 +6,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author： zhoudewei
@@ -24,5 +25,13 @@ public class SpiderInfoDao {
      */
     public void batchSaveSpiderInfo(List<SpiderInfo> list){
         spiderInfoMapper.batchInsert(list);
+    }
+
+    /**
+     * 根据条件查询爬虫信息
+     * @return
+     */
+    public List<SpiderInfo> querySpiderInfoListBySelective(Map<String, Object> map){
+        return spiderInfoMapper.selectBySelective(map);
     }
 }
