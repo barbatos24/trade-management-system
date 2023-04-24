@@ -160,11 +160,19 @@ public class SpiderService {
 
         PageHelper.startPage(request.getPageNo(), request.getPageSize());
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("brandEn", request.getBrandName());
+        if(request.getBrandList() != null && request.getBrandList().size() > 0){
+            paramMap.put("brandList", request.getBrandList());
+        }
+        if(request.getStoreList() != null && request.getStoreList().size() > 0){
+            paramMap.put("storeList", request.getStoreList());
+        }
         paramMap.put("maxPrice", request.getMaxPrice());
         paramMap.put("minPrice", request.getMinPrice());
-        paramMap.put("storeName", request.getStoreName());
-        paramMap.put("hasDiscountFlag", request.getHasDiscount() ? 1 : 0);
+        paramMap.put("createdStartDate", request.getStartDate());
+        paramMap.put("createdEndDate", request.getEndDate());
+        if(request.getHasDiscount() != null){
+            paramMap.put("hasDiscount", request.getHasDiscount() ? 1 : 0);
+        }
         PageInfo<SpiderInfo> spiderInfoListByPage = new PageInfo<>(spiderInfoDao.querySpiderInfoListBySelective(paramMap));
 
         response.setPageNo(spiderInfoListByPage.getPageNum());
@@ -193,12 +201,8 @@ public class SpiderService {
             discount.setDiscount(String.valueOf(spider.getDiscount()));
             discount.setDiscountModeList(Arrays.asList(spider.getDiscountMode().split(",")));
             detail.setDiscountInfo(discount);
-            //商场信息
-            QueryCrawledDataResponse.StoreInfo store = new QueryCrawledDataResponse.StoreInfo();
-            JSONObject storeJson = JSONObject.parseObject(spider.getStoreInfo());
-            store.setStoreName(storeJson.getString("storeName"));
-            store.setStoreAddress(BaiLianStoreEnum.get(storeJson.getString("storeCode")).getStoreAddress());
-            detail.setStoreInfo(store);
+            //商场名称
+            detail.setStoreName(spider.getStoreName());
             dataDetailList.add(detail);
         }
         response.setDataDetailList(dataDetailList);

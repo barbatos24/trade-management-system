@@ -21,7 +21,6 @@ public class SpiderInfoAssembler {
     public static List<SpiderInfo> convert2SpiderInfoEntity4Save(BaiLianSpiderAggregateInfoDto baiLianSpiderAggregateInfoDto){
         List<SpiderInfo> spiderInfoList = new ArrayList<>();
         List<BaiLianSpiderAggregateInfoDto.ProductInfoDto> productInfoList = baiLianSpiderAggregateInfoDto.getProductInfoDtoList();
-        BaiLianSpiderAggregateInfoDto.ShopInfoDto shopInfo = baiLianSpiderAggregateInfoDto.getShopInfoDto();
         BaiLianSpiderAggregateInfoDto.StoreInfoDto storeInfo = baiLianSpiderAggregateInfoDto.getStoreInfoDto();
         for(BaiLianSpiderAggregateInfoDto.ProductInfoDto product : productInfoList){
             SpiderInfo spiderInfo = new SpiderInfo();
@@ -43,8 +42,7 @@ public class SpiderInfoAssembler {
             } else {
                 spiderInfo.setHasDiscountFlag(0);
             }
-            spiderInfo.setShopInfo(JSON.toJSONString(shopInfo));
-            spiderInfo.setStoreInfo(JSON.toJSONString(storeInfo));
+            spiderInfo.setStoreName(storeInfo.getStoreName());
             spiderInfo.setOperateType(baiLianSpiderAggregateInfoDto.getOperatorType().getType());
             spiderInfo.setOperator(baiLianSpiderAggregateInfoDto.getOperator());
             spiderInfo.setCreatedTime(new Date());

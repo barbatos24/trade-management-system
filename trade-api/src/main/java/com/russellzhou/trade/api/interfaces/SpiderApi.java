@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping(value = "/spiderApi")
+@CrossOrigin(originPatterns = "http://localhost:8002")
 public class SpiderApi {
 
     private static final Logger log = LoggerFactory.getLogger(SpiderApi.class);
@@ -47,5 +48,7 @@ public class SpiderApi {
     public ResponseVO<QueryCrawledDataResponse> queryCrawledData(@RequestBody QueryCrawledDataRequest request){
         return ResponseVO.ofSuccess(spiderService.queryCrawledData(request));
     }
+
+
 
 }

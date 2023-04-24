@@ -5,6 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author： zhoudewei
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @MapperScan(basePackages = {" com.russellzhou.trade.data.mapper"})
 @ComponentScan(value = "com.russellzhou")
+@EnableScheduling
 public class TradeApiApplication {
 
     public static void main(String[] args) {

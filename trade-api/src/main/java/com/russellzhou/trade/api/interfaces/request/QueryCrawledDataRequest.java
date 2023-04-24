@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author： zhoudewei
@@ -23,8 +25,11 @@ public class QueryCrawledDataRequest implements Serializable {
     @ApiModelProperty(value = "页大小)")
     private Integer pageSize;
 
-    @ApiModelProperty(value = "品牌名称(英文)")
-    private String brandName;
+    @ApiModelProperty(value = "品牌名称(英文)列表")
+    private List<String> brandList;
+
+    @ApiModelProperty(value = "商场列表")
+    private List<String> storeList;
 
     @ApiModelProperty(value = "最高价格")
     private Long maxPrice;
@@ -32,9 +37,12 @@ public class QueryCrawledDataRequest implements Serializable {
     @ApiModelProperty(value = "最低价格")
     private Long minPrice;
 
-    @ApiModelProperty(value = "商场名称")
-    private String storeName;
-
     @ApiModelProperty(value = "是否有优惠")
     private Boolean hasDiscount;
+
+    @ApiModelProperty(value = "爬虫执行开始日期")
+    private Date startDate;
+
+    @ApiModelProperty(value = "爬虫执行结束日期")
+    private Date endDate;
 }

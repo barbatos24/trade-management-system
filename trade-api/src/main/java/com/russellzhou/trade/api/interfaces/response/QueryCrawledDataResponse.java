@@ -68,8 +68,8 @@ public class QueryCrawledDataResponse implements Serializable {
         @ApiModelProperty(value = "优惠信息")
         private DiscountInfo discountInfo;
 
-        @ApiModelProperty(value = "商场信息")
-        private StoreInfo storeInfo;
+        @ApiModelProperty(value = "商场名称")
+        private String storeName;
     }
 
     @Setter
@@ -83,14 +83,4 @@ public class QueryCrawledDataResponse implements Serializable {
         private List<String> discountModeList;
     }
 
-    @Setter
-    @Getter
-    public static class StoreInfo{
-
-        @ApiModelProperty(value = "商场名称")
-        private String storeName;
-
-        @ApiModelProperty(value = "商场地址")
-        private String storeAddress;
-    }
 }

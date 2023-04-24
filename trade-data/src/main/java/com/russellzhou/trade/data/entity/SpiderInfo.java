@@ -87,14 +87,9 @@ public class SpiderInfo {
     private Integer hasDiscountFlag;
 
     /**
-     *   商铺信息
+     *   商场名称
      */
-    private String shopInfo;
-
-    /**
-     *   商场信息
-     */
-    private String storeInfo;
+    private String storeName;
 
     /**
      * 运行类型
