@@ -14,7 +14,7 @@ import java.util.stream.Stream;
  */
 @Getter
 public enum SpiderWebChannelEnum {
-    WECHAT_MINI_PROGRAMMER(1000, "wechat_mini_programmer", "微信小程序")
+    WECHAT_MINI_PROGRAMMER(1000, "WECHAT_MINI_PROGRAMMER", "微信小程序")
     ;
 
     private Integer code;

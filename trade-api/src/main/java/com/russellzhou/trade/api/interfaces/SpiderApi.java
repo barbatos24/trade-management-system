@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author： zhoudewei
  * @date： 2023/2/21 13:57
@@ -49,6 +51,23 @@ public class SpiderApi {
         return ResponseVO.ofSuccess(spiderService.queryCrawledData(request));
     }
 
+    /**
+     * 查询所有品牌
+     * @return
+     */
+    @GetMapping(value = "/queryAllBrand")
+    public ResponseVO<List<String>> queryAllBrand(){
+        return ResponseVO.ofSuccess(spiderService.queryAllBrand());
+    }
+
+    /**
+     * 查询所有商场名称
+     * @return
+     */
+    @GetMapping(value = "/queryAllStoreName")
+    public  ResponseVO<List<String>> queryAllStoreName(){
+        return ResponseVO.ofSuccess(spiderService.queryAllStoreName());
+    }
 
 
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class QueryCrawledDataResponse implements Serializable {
     private Integer totalPage;
 
     @ApiModelProperty(value = "总共数据条数")
-    private Integer totalNum;
+    private Long totalNum;
 
     @ApiModelProperty(value = "数据详情")
     private List<DataDetail> dataDetailList;
@@ -40,6 +41,9 @@ public class QueryCrawledDataResponse implements Serializable {
 
         @ApiModelProperty("百联云店商品编号")
         private String baiLianProductId;
+
+        @ApiModelProperty("数据来源渠道")
+        private String webChannel;
 
         @ApiModelProperty(value = "品牌名称(英文)")
         private String brandEn;
@@ -70,6 +74,12 @@ public class QueryCrawledDataResponse implements Serializable {
 
         @ApiModelProperty(value = "商场名称")
         private String storeName;
+
+        @ApiModelProperty(value = "是否历史最低价")
+        private Boolean lowestPriceFlag;
+
+        @ApiModelProperty(value = "爬虫任务触发时间")
+        private String createdDateTime;
     }
 
     @Setter
@@ -81,6 +91,7 @@ public class QueryCrawledDataResponse implements Serializable {
 
         @ApiModelProperty(value = "优惠模式")
         private List<String> discountModeList;
+
     }
 
 }

@@ -34,4 +34,20 @@ public class SpiderInfoDao {
     public List<SpiderInfo> querySpiderInfoListBySelective(Map<String, Object> map){
         return spiderInfoMapper.selectBySelective(map);
     }
+
+    /**
+     * 查询所有品牌
+     * @return
+     */
+    public List<String> queryBrandList(){
+        return spiderInfoMapper.selectBrandList();
+    }
+
+    /**
+     * 查询所有商场名称
+     * @return
+     */
+    public List<String> queryStoreNameList(){
+        return spiderInfoMapper.selectStoreNameList();
+    }
 }

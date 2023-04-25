@@ -67,33 +67,43 @@
     FROM `spider_info`
     <where>
       <if test="brandList != null">
-        `brand_en` IN
+        `brand_zh` IN
         <foreach collection="brandList" separator="," item="item" index="index" open="(" close=")">
           #{item}
         </foreach>
       </if>
       <if test="storeList != null">
-        `store_name` IN
+        AND `store_name` IN
         <foreach collection="storeList" separator="," item="item" index="index" open="(" close=")">
           #{item}
         </foreach>
       </if>
       <if test="maxPrice != null">
-        `actual_price` <![CDATA[ <= ]]> #{maxPrice}
+        AND `actual_price` <![CDATA[ <= ]]> #{maxPrice}
       </if>
       <if test="minPrice != null">
-        `actual_price` <![CDATA[ >= ]]> #{minPrice}
+        AND `actual_price` <![CDATA[ >= ]]> #{minPrice}
       </if>
       <if test="createdStartDate != null">
-        `created_time` <![CDATA[ <= ]]> #{createdStartDate}
+        AND `created_time` <![CDATA[ >= ]]> #{createdStartDate}
       </if>
       <if test="createdEndDate != null">
-        `created_time` <![CDATA[ >= ]]> #{createdEndDate}
+        AND `created_time` <![CDATA[ <= ]]> #{createdEndDate}
       </if>
       <if test="hasDiscountFlag != null">
-        `has_discount_flag` = #{hasDiscountFlag}
+        AND `has_discount_flag` = #{hasDiscountFlag}
       </if>
     </where>
+  </select>
+
+  <select id="selectBrandList" resultType="java.lang.String">
+    SELECT DISTINCT `brand_zh`
+    FROM `spider_info`
+  </select>
+
+  <select id="selectStoreNameList" resultType="java.lang.String">
+    SELECT DISTINCT `store_name`
+    FROM `spider_info`
   </select>
 
 </mapper>

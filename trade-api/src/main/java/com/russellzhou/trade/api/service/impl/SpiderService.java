@@ -1,7 +1,5 @@
 package com.russellzhou.trade.api.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.russellzhou.trade.api.interfaces.request.QueryCrawledDataRequest;
@@ -19,6 +17,7 @@ import com.russellzhou.trade.infrastructure.common.enums.SpiderWebChannelEnum;
 import com.russellzhou.trade.api.assembler.dao.SpiderInfoAssembler;
 import com.russellzhou.trade.api.service.dto.spider.BaiLianSpiderAggregateInfoDto;
 import com.russellzhou.trade.api.service.dto.spider.GetBaiLianCommodityDto;
+import com.russellzhou.trade.infrastructure.utils.DateTimeUtil;
 import com.russellzhou.trade.infrastructure.utils.PriceUtils;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
@@ -159,6 +158,7 @@ public class SpiderService {
         List<QueryCrawledDataResponse.DataDetail> dataDetailList = new ArrayList<>();
 
         PageHelper.startPage(request.getPageNo(), request.getPageSize());
+        PageHelper.orderBy("created_time desc");
         Map<String, Object> paramMap = new HashMap<>();
         if(request.getBrandList() != null && request.getBrandList().size() > 0){
             paramMap.put("brandList", request.getBrandList());
@@ -166,8 +166,12 @@ public class SpiderService {
         if(request.getStoreList() != null && request.getStoreList().size() > 0){
             paramMap.put("storeList", request.getStoreList());
         }
-        paramMap.put("maxPrice", request.getMaxPrice());
-        paramMap.put("minPrice", request.getMinPrice());
+        if(request.getMaxPrice() != null){
+            paramMap.put("maxPrice", PriceUtils.changeYuan2Fen(request.getMaxPrice()));
+        }
+        if(request.getMinPrice() != null){
+            paramMap.put("minPrice", PriceUtils.changeYuan2Fen(request.getMinPrice()));
+        }
         paramMap.put("createdStartDate", request.getStartDate());
         paramMap.put("createdEndDate", request.getEndDate());
         if(request.getHasDiscount() != null){
@@ -178,12 +182,14 @@ public class SpiderService {
         response.setPageNo(spiderInfoListByPage.getPageNum());
         response.setPageSize(spiderInfoListByPage.getPageSize());
         response.setTotalPage(spiderInfoListByPage.getPages());
-        response.setTotalNum(spiderInfoListByPage.getSize());
+        response.setTotalNum(spiderInfoListByPage.getTotal());
 
         for(SpiderInfo spider : spiderInfoListByPage.getList()){
             QueryCrawledDataResponse.DataDetail detail = new QueryCrawledDataResponse.DataDetail();
+            detail.setCreatedDateTime(DateTimeUtil.formatChineseDate(spider.getCreatedTime()));
             //商品信息
             detail.setBaiLianProductId(spider.getProductId());
+            detail.setWebChannel(spider.getWebChannel());
             detail.setBrandEn(spider.getBrandEn());
             detail.setBrandZh(spider.getBrandZh());
             detail.setTitle(spider.getProductTitle());
@@ -196,6 +202,7 @@ public class SpiderService {
             detail.setImgUrl(spider.getImgUrl());
             detail.setMarketPrice(PriceUtils.changeFen2ChineseYuan(spider.getOriginPrice()));
             detail.setActualPrice(PriceUtils.changeFen2ChineseYuan(spider.getActualPrice()));
+            detail.setLowestPriceFlag(spider.getLowestPriceFlag() == 1);
             //优惠信息
             QueryCrawledDataResponse.DiscountInfo discount = new QueryCrawledDataResponse.DiscountInfo();
             discount.setDiscount(String.valueOf(spider.getDiscount()));
@@ -207,6 +214,14 @@ public class SpiderService {
         }
         response.setDataDetailList(dataDetailList);
         return response;
+    }
+
+    public List<String> queryAllBrand(){
+        return spiderInfoDao.queryBrandList();
+    }
+
+    public List<String> queryAllStoreName(){
+        return spiderInfoDao.queryStoreNameList();
     }
 
 }

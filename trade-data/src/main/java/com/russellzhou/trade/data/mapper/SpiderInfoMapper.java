@@ -14,4 +14,8 @@ public interface SpiderInfoMapper {
     int batchInsert(List<SpiderInfo> list);
 
     List<SpiderInfo> selectBySelective(Map<String, Object> map);
+
+    List<String> selectBrandList();
+
+    List<String> selectStoreNameList();
 }

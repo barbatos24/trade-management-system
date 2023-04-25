@@ -32,10 +32,10 @@ public class QueryCrawledDataRequest implements Serializable {
     private List<String> storeList;
 
     @ApiModelProperty(value = "最高价格")
-    private Long maxPrice;
+    private Float maxPrice;
 
     @ApiModelProperty(value = "最低价格")
-    private Long minPrice;
+    private Float minPrice;
 
     @ApiModelProperty(value = "是否有优惠")
     private Boolean hasDiscount;
