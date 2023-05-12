@@ -1,7 +1,7 @@
 package com.russellzhou.trade.api.assembler.dao;
 
-import com.alibaba.fastjson.JSON;
 import com.russellzhou.trade.data.entity.SpiderInfo;
+import com.russellzhou.trade.infrastructure.utils.CategoryUtils;
 import com.russellzhou.trade.infrastructure.utils.PriceUtils;
 import com.russellzhou.trade.api.service.dto.spider.BaiLianSpiderAggregateInfoDto;
 import org.apache.commons.lang3.StringUtils;
@@ -24,10 +24,11 @@ public class SpiderInfoAssembler {
         BaiLianSpiderAggregateInfoDto.StoreInfoDto storeInfo = baiLianSpiderAggregateInfoDto.getStoreInfoDto();
         for(BaiLianSpiderAggregateInfoDto.ProductInfoDto product : productInfoList){
             SpiderInfo spiderInfo = new SpiderInfo();
-            spiderInfo.setProductId(product.getProductId());
+            spiderInfo.setBlydPid(product.getProductId());
             spiderInfo.setBrandEn(product.getEnglishBrandName());
             spiderInfo.setBrandZh(product.getChineseBrandName());
             spiderInfo.setWebChannel(baiLianSpiderAggregateInfoDto.getSource());
+            spiderInfo.setCategoryCode(CategoryUtils.classifyByProductTitle(product.getTitle()).getCode());
             spiderInfo.setProductTitle(product.getTitle());
             spiderInfo.setProductType(String.join(",", product.getType()));
             spiderInfo.setProductSize(String.join(",", product.getSize()));

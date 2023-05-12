@@ -17,9 +17,9 @@ public class SpiderInfo {
     private Long id;
 
     /**
-     *   商品id
+     *  百联云店 商品id
      */
-    private String productId;
+    private String blydPid;
 
     /**
      *   品牌名称（英文）
@@ -35,6 +35,11 @@ public class SpiderInfo {
      *   数据来源
      */
     private String webChannel;
+
+    /**
+     * 商品类目code
+     */
+    private Integer categoryCode;
 
     /**
      *   商品名称

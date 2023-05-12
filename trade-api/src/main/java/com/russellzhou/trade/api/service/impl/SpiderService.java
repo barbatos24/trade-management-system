@@ -188,7 +188,7 @@ public class SpiderService {
             QueryCrawledDataResponse.DataDetail detail = new QueryCrawledDataResponse.DataDetail();
             detail.setCreatedDateTime(DateTimeUtil.formatChineseDate(spider.getCreatedTime()));
             //商品信息
-            detail.setBaiLianProductId(spider.getProductId());
+            detail.setBaiLianProductId(spider.getBlydPid());
             detail.setWebChannel(spider.getWebChannel());
             detail.setBrandEn(spider.getBrandEn());
             detail.setBrandZh(spider.getBrandZh());

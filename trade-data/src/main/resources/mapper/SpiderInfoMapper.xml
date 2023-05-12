@@ -4,10 +4,11 @@
 
   <resultMap id="BaseResultMap" type="com.russellzhou.trade.data.entity.SpiderInfo">
     <result column="id" jdbcType="BIGINT" property="id" />
-    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="blyd_pid" jdbcType="VARCHAR" property="blydPid" />
     <result column="brand_en" jdbcType="VARCHAR" property="brandEn" />
     <result column="brand_zh" jdbcType="VARCHAR" property="brandZh" />
     <result column="web_channel" jdbcType="VARCHAR" property="webChannel" />
+    <result column="category_code" jdbcType="INTEGER" property="categoryCode" />
     <result column="product_title" jdbcType="VARCHAR" property="productTitle" />
     <result column="product_type" jdbcType="VARCHAR" property="productType" />
     <result column="product_size" jdbcType="VARCHAR" property="productSize" />
@@ -25,39 +26,43 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, product_id, brand_en, brand_zh, web_channel, product_title, product_type, product_size, img_url, origin_price, actual_price,  lowest_price_flag, discount, discount_mode, has_discount_flag,  store_name, operate_type, operator, created_time
+    id, blyd_pid, brand_en, brand_zh, web_channel, category_code, product_title, product_type, product_size, img_url, origin_price, actual_price,  lowest_price_flag, discount, discount_mode, has_discount_flag,  store_name, operate_type, operator, created_time
   </sql>
 
   <insert id="insert" parameterType="com.russellzhou.trade.data.entity.SpiderInfo">
-    insert into `spider_info` (product_id, brand_en,
-      brand_zh, web_channel, product_title, 
+    insert into `spider_info` (blyd_pid, brand_en,brand_zh,
+      web_channel, category_code,product_title,
       product_type, product_size, img_url, 
       origin_price, actual_price, lowest_price_flag, 
       discount, discount_mode, has_discount_flag,
-      store_name, operate_type, operator, created_time)
-    values (#{productId,jdbcType=VARCHAR}, #{brandEn,jdbcType=VARCHAR},
-      #{brandZh,jdbcType=VARCHAR}, #{webChannel,jdbcType=VARCHAR}, #{productTitle,jdbcType=VARCHAR}, 
+      store_name, operate_type, operator,
+      created_time)
+    values (#{blydPid,jdbcType=VARCHAR}, #{brandEn,jdbcType=VARCHAR}, #{brandZh,jdbcType=VARCHAR},
+      #{webChannel,jdbcType=VARCHAR}, #{categoryCode,jdbcType=INTEGER}, #{productTitle,jdbcType=VARCHAR},
       #{productType,jdbcType=VARCHAR}, #{productSize,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
       #{originPrice,jdbcType=INTEGER}, #{actualPrice,jdbcType=INTEGER}, #{lowestPriceFlag,jdbcType=TINYINT}, 
       #{discount,jdbcType=DOUBLE}, #{discountMode,jdbcType=VARCHAR}, #{hasDiscountFlag,jdbcType=TINYINT},
-      #{storeName,jdbcType=VARCHAR}, #{operateType, jdbcType=TINYINT}, #{operator,jdbcType=VARCHAR},#{createdTime,jdbcType=TIMESTAMP})
+      #{storeName,jdbcType=VARCHAR}, #{operateType, jdbcType=TINYINT}, #{operator,jdbcType=VARCHAR},
+      #{createdTime,jdbcType=TIMESTAMP})
   </insert>
 
   <insert id="batchInsert" parameterType="java.util.List">
-    INSERT INTO  `spider_info` (product_id, brand_en,brand_zh,
-    web_channel, product_title,product_type,
-    product_size, img_url,origin_price,
-    actual_price, lowest_price_flag,discount,
-    discount_mode, has_discount_flag,store_name,
-    operate_type, operator,created_time)
+    INSERT INTO  `spider_info` (blyd_pid, brand_en,brand_zh,
+      web_channel, category_code, product_title,
+      product_type, product_size, img_url,
+      origin_price, actual_price, lowest_price_flag,
+      discount,discount_mode, has_discount_flag,
+      store_name,operate_type, operator,
+      created_time)
     VALUES
     <foreach collection="list" separator="," item="item" index="index">
-      (#{item.productId}, #{item.brandEn},#{item.brandZh},
-      #{item.webChannel}, #{item.productTitle},#{item.productType},
-      #{item.productSize}, #{item.imgUrl},#{item.originPrice},
-      #{item.actualPrice}, #{item.lowestPriceFlag},#{item.discount},
-      #{item.discountMode}, #{item.hasDiscountFlag},#{item.storeName},
-       #{item.operateType}, #{item.operator},#{item.createdTime})
+      (#{item.blydPid}, #{item.brandEn},#{item.brandZh},
+      #{item.webChannel}, #{item.categoryCode}, #{item.productTitle},
+      #{item.productType},#{item.productSize}, #{item.imgUrl},
+      #{item.originPrice},#{item.actualPrice}, #{item.lowestPriceFlag},
+      #{item.discount},#{item.discountMode}, #{item.hasDiscountFlag},
+      #{item.storeName},#{item.operateType}, #{item.operator},
+      #{item.createdTime})
     </foreach>
   </insert>
 
